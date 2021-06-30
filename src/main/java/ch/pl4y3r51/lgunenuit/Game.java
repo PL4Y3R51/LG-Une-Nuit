@@ -89,4 +89,12 @@ public final class Game extends JavaPlugin {
     public void setVotablePlayersList(List<IngamePlayers> votablePlayersList) {
         this.votablePlayersList = votablePlayersList;
     }
+
+    public List<Location> getSpawns() {
+        return spawns;
+    }
+
+    public void setSpawns(List<Location> spawns) {
+        this.spawns = spawns;
+    }
 }

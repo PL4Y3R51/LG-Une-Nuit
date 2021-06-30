@@ -1,6 +1,7 @@
 package ch.pl4y3r51.lgunenuit;
 
 import ch.pl4y3r51.lgunenuit.bean.Role;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -67,7 +68,32 @@ public class MyLoader {
     }
 
     public List<Location> loadSpawns(){
-        return null;
+        List<Location> spawns = new ArrayList<>();
+            //1
+            spawns.add(new Location(Bukkit.getWorld("world"), -234.500, 21.600, -67.500, -58, 10));
+            //2
+            spawns.add(new Location(Bukkit.getWorld("world"), -236.500, 21.600, -61.500, -90, 10));
+            //3
+            spawns.add(new Location(Bukkit.getWorld("world"), -234.500, 21.600, -55.500, -121, 10));
+            //4
+            spawns.add(new Location(Bukkit.getWorld("world"), -230.500, 21.600, -51.500, -150, 10));
+            //5
+            spawns.add(new Location(Bukkit.getWorld("world"), -224.500, 21.600, -50.500, -180, 10));
+            //6
+            spawns.add(new Location(Bukkit.getWorld("world"), -218.500, 21.600, -51.500, -150, 10));
+            //7
+            spawns.add(new Location(Bukkit.getWorld("world"), -214.500, 21.600, -55.500, -121, 10));
+            //8
+            spawns.add(new Location(Bukkit.getWorld("world"), -212.500, 21.600, -61.500, -90, 10));
+            //9
+            spawns.add(new Location(Bukkit.getWorld("world"), -214.500, 21.600, -67.500, -58, 10));
+            //10
+            spawns.add(new Location(Bukkit.getWorld("world"), -218.500, 21.600, -71.500, -32, 10));
+            //11
+            spawns.add(new Location(Bukkit.getWorld("world"), -224.500, 21.600, -73.500, -0, 10));
+            //12
+            spawns.add(new Location(Bukkit.getWorld("world"), -230.500, 21.600, -71.500, -32, 10));
+        return spawns;
     }
 
     private ItemStack itemWithName(Material material, String displayName) {

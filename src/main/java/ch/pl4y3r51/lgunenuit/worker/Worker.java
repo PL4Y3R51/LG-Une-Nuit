@@ -27,26 +27,26 @@ public class Worker {
     }
 
     public void startGame() {
+        Random random = new Random();
+        //Charger les spawns de chacuns
+        for (int i = 0; i < random.nextInt(100); i++) {
+            Collections.shuffle(game.getSelectedRoles());
+            Collections.shuffle(game.getSpawns());
+        }
+
+        for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
+            game.getIngamePlayersList().get(i).setSpawn(game.getSpawns().get(i));
+        }
+
+        //DONNER LES EFFETS + clear inv
         for (IngamePlayers p : game.getIngamePlayersList()) {
             p.getPlayer().getInventory().clear();
-        }
-
-        //TP EVERYONE
-        for (IngamePlayers p : game.getIngamePlayersList()) {
-            //tp - > spawn
-        }
-
-        //DONNER LES EFFETS
-        for (IngamePlayers p : game.getIngamePlayersList()){
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+            p.getPlayer().teleport(p.getSpawn());
         }
 
         //Donner les rôles ( + infos au joueur)
-        Random random = new Random();
-        for (int i = 0; i < random.nextInt(100); i++) {
-            Collections.shuffle(game.getSelectedRoles());
-        }
         for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
             Role selectedRole = game.getSelectedRoles().get(i);
 
