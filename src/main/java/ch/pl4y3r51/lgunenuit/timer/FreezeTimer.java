@@ -1,0 +1,31 @@
+package ch.pl4y3r51.lgunenuit.timer;
+
+import ch.pl4y3r51.lgunenuit.Game;
+import ch.pl4y3r51.lgunenuit.GameState;
+import ch.pl4y3r51.lgunenuit.bean.IngamePlayers;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.scheduler.BukkitRunnable;
+
+public class FreezeTimer extends BukkitRunnable {
+
+    private Game game;
+
+    public FreezeTimer(Game game) {
+        this.game = game;
+    }
+
+    @Override
+    public void run() {
+        for (IngamePlayers p: game.getIngamePlayersList()) {
+            p.getPlayer().teleport(p.getSpawn());
+        }
+        if (game.getGameState()== GameState.DAY){
+            for (IngamePlayers p: game.getIngamePlayersList()) {
+                for (PotionEffect pe: p.getPlayer().getActivePotionEffects()) {
+                    p.getPlayer().removePotionEffect(pe.getType());
+                }
+            }
+            cancel();
+        }
+    }
+}

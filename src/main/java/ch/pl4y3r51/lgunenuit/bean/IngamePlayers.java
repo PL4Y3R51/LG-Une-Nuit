@@ -1,5 +1,6 @@
 package ch.pl4y3r51.lgunenuit.bean;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 public class IngamePlayers implements Comparable {
@@ -10,6 +11,7 @@ public class IngamePlayers implements Comparable {
     private int vote = 0;
     private boolean asVoted = false;
     private IngamePlayers votedPlayer;
+    private Location spawn;
 
     public IngamePlayers(Player player) {
         this.player = player;
@@ -57,6 +59,14 @@ public class IngamePlayers implements Comparable {
 
     public void setVotedPlayer(IngamePlayers votedPlayer) {
         this.votedPlayer = votedPlayer;
+    }
+
+    public Location getSpawn() {
+        return spawn;
+    }
+
+    public void setSpawn(Location spawn) {
+        this.spawn = spawn;
     }
 
     @Override

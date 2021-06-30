@@ -8,6 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.List;
 
@@ -24,6 +26,16 @@ public class WorkerRoles {
     }
 
     public void playLoupGarou(List<IngamePlayers> players) {
+        for (IngamePlayers p : game.getIngamePlayersList()){
+            p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+        for (IngamePlayers p: players) {
+            for (PotionEffect pe: p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
+        }
+
         players.remove(null);
         Bukkit.broadcastMessage("[§5One Night LG§r] Les loups garous se réveillent");
 
@@ -58,7 +70,10 @@ public class WorkerRoles {
     }
 
     public void playSbire(IngamePlayers p) {
-
+        for (IngamePlayers ingamePlayers : game.getIngamePlayersList()){
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
         Bukkit.broadcastMessage("[§5One Night LG§r] Le sbire se réveille");
 
         for (int i = 0; i < game.getSelectedRoles().size(); i++) {
@@ -68,6 +83,9 @@ public class WorkerRoles {
         }
 
         if (p != null) {
+            for (PotionEffect pe:p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
             for (IngamePlayers possibleLoupGarou : game.getIngamePlayersList()) {
                 if (possibleLoupGarou.getEndRole().getPassage() == 2) {
                     p.getPlayer().sendMessage("Le joueur " + possibleLoupGarou.getPlayer().getName() + " est un Loup-Garou");
@@ -79,6 +97,18 @@ public class WorkerRoles {
     }
 
     public void playFrancMacon(List<IngamePlayers> players) {
+        for (IngamePlayers p : game.getIngamePlayersList()){
+            p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+
+
+        for (IngamePlayers p: players) {
+            for (PotionEffect pe: p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
+        }
+
         players.remove(null);
         Bukkit.broadcastMessage("[§5One Night LG§r] Les francs-maçons se réveillent");
 
@@ -114,6 +144,11 @@ public class WorkerRoles {
 
     public void playVoyante(IngamePlayers p) {
 
+        for (IngamePlayers ingamePlayers : game.getIngamePlayersList()){
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+
         Bukkit.broadcastMessage("[§5One Night LG§r] La voyante se réveille");
 
         for (int i = 0; i < game.getSelectedRoles().size(); i++) {
@@ -123,6 +158,9 @@ public class WorkerRoles {
         }
 
         if (p != null) {
+            for (PotionEffect pe:p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
             //Donne l'item de voyante 1
             p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOYANTE - 1"));
         }
@@ -132,6 +170,12 @@ public class WorkerRoles {
     }
 
     public void playVoleur(IngamePlayers p) {
+
+        for (IngamePlayers ingamePlayers : game.getIngamePlayersList()){
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+
         Bukkit.broadcastMessage("[§5One Night LG§r] Le voleur se réveille");
 
         for (int i = 0; i < game.getSelectedRoles().size(); i++) {
@@ -141,6 +185,9 @@ public class WorkerRoles {
         }
 
         if (p != null) {
+            for (PotionEffect pe:p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
             //Donner l'item de voleur pour changer son rôle
             p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOLEUR"));
         }
@@ -152,6 +199,11 @@ public class WorkerRoles {
 
     public void playNoiseuse(IngamePlayers p) {
 
+        for (IngamePlayers ingamePlayers : game.getIngamePlayersList()){
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+
         Bukkit.broadcastMessage("[§5One Night LG§r] La noiseuse se réveille");
 
         for (int i = 0; i < game.getSelectedRoles().size(); i++) {
@@ -161,6 +213,9 @@ public class WorkerRoles {
         }
 
         if (p != null) {
+            for (PotionEffect pe:p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
             //Donner l'item de noiseuse pour changer son rôle
             p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM NOISEUSE - 1"));
         }
@@ -170,6 +225,12 @@ public class WorkerRoles {
     }
 
     public void playSoulard(IngamePlayers p) {
+
+        for (IngamePlayers ingamePlayers : game.getIngamePlayersList()){
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+
         Bukkit.broadcastMessage("[§5One Night LG§r] Le soulard se réveille");
 
         for (int i = 0; i < game.getSelectedRoles().size(); i++) {
@@ -179,6 +240,9 @@ public class WorkerRoles {
         }
 
         if (p != null) {
+            for (PotionEffect pe:p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
             //Donner l'item de soulard pour changer son rôle
             p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM SOÛLARD"));
         }
@@ -190,6 +254,11 @@ public class WorkerRoles {
 
     public void playInsomniaque(IngamePlayers p) {
 
+        for (IngamePlayers ingamePlayers : game.getIngamePlayersList()){
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            ingamePlayers.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
+
         Bukkit.broadcastMessage("[§5One Night LG§r] L'insomniaque se réveille");
 
         for (int i = 0; i < game.getSelectedRoles().size(); i++) {
@@ -199,6 +268,9 @@ public class WorkerRoles {
         }
 
         if (p != null) {
+            for (PotionEffect pe:p.getPlayer().getActivePotionEffects()) {
+                p.getPlayer().removePotionEffect(pe.getType());
+            }
             p.getPlayer().sendMessage("Votre role est maintenant " + p.getEndRole().getNom());
         }
 

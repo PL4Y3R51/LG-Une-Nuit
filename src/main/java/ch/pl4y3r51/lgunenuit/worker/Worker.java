@@ -6,9 +6,12 @@ import ch.pl4y3r51.lgunenuit.GameTeam;
 import ch.pl4y3r51.lgunenuit.bean.IngamePlayers;
 import ch.pl4y3r51.lgunenuit.bean.Role;
 import ch.pl4y3r51.lgunenuit.timer.FirstStart;
+import ch.pl4y3r51.lgunenuit.timer.FreezeTimer;
 import ch.pl4y3r51.lgunenuit.timer.VoteTimer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.*;
 
@@ -27,9 +30,17 @@ public class Worker {
         for (IngamePlayers p : game.getIngamePlayersList()) {
             p.getPlayer().getInventory().clear();
         }
+
         //TP EVERYONE
+        for (IngamePlayers p : game.getIngamePlayersList()) {
+            //tp - > spawn
+        }
 
         //DONNER LES EFFETS
+        for (IngamePlayers p : game.getIngamePlayersList()){
+            p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
+            p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
+        }
 
         //Donner les rôles ( + infos au joueur)
         Random random = new Random();
@@ -73,6 +84,9 @@ public class Worker {
 
         FirstStart firstStart = new FirstStart(game);
         firstStart.runTaskTimer(game, 0, 20);
+
+        FreezeTimer freezeTimer = new FreezeTimer(game);
+        freezeTimer.runTaskTimer(game, 0, 10);
         //Passage tour par tour de la nuit.
 
     }
@@ -208,16 +222,16 @@ public class Worker {
         if (players.size() == 0) {
             List<IngamePlayers> winners = new ArrayList<>();
             boolean lgWin = false;
-            for (IngamePlayers p: game.getIngamePlayersList()) {
-                if (p.getEndRole().getPassage()==2){
-                    lgWin=true;
+            for (IngamePlayers p : game.getIngamePlayersList()) {
+                if (p.getEndRole().getPassage() == 2) {
+                    lgWin = true;
                     winners.add(p);
                 }
             }
 
-            if (lgWin){
-                for (IngamePlayers p: game.getIngamePlayersList()) {
-                    if (p.getEndRole().getPassage()==3){
+            if (lgWin) {
+                for (IngamePlayers p : game.getIngamePlayersList()) {
+                    if (p.getEndRole().getPassage() == 3) {
                         winners.add(p);
                         break;
                     }
@@ -230,15 +244,15 @@ public class Worker {
                     Bukkit.broadcastMessage(winner.getPlayer().getName() + " (" + winner.getEndRole().getNom() + ")");
                 }
                 Bukkit.broadcastMessage("§6------------------------");
-            }else{
-                for (IngamePlayers p: game.getIngamePlayersList()) {
-                    if (p.getEndRole().getPassage()==3){
+            } else {
+                for (IngamePlayers p : game.getIngamePlayersList()) {
+                    if (p.getEndRole().getPassage() == 3) {
                         winners.add(p);
                         break;
                     }
                 }
                 //sbire win ?
-                if (winners.size()==1){
+                if (winners.size() == 1) {
                     Bukkit.broadcastMessage("§6------------------------");
                     Bukkit.broadcastMessage("§4Le sbire a remporté la partie !");
                     Bukkit.broadcastMessage("§6------------------------");
@@ -247,7 +261,7 @@ public class Worker {
                         Bukkit.broadcastMessage(winner.getPlayer().getName() + " (" + winner.getEndRole().getNom() + ")");
                     }
                     Bukkit.broadcastMessage("§6------------------------");
-                }else{
+                } else {
                     //Vilage Win
                     Bukkit.broadcastMessage("§6------------------------");
                     Bukkit.broadcastMessage("§2L'équipe des Villageois ont remportés la partie !");
@@ -256,7 +270,6 @@ public class Worker {
                     Bukkit.broadcastMessage("§6------------------------");
                 }
             }
-
 
 
         } else if (players.size() == 1) {
@@ -390,24 +403,24 @@ public class Worker {
             }
         }
         Bukkit.broadcastMessage("§6------------------------");
-        for (IngamePlayers allPlayer: game.getIngamePlayersList()) {
+        for (IngamePlayers allPlayer : game.getIngamePlayersList()) {
             String color1;
             String color2;
-            if (allPlayer.getStartRole().getTeam()==GameTeam.LG){
-                color1="§4";
-            }else if (allPlayer.getStartRole().getTeam()==GameTeam.VILLAGE){
-                color1="§2";
-            }else{
-                color1="§9";
+            if (allPlayer.getStartRole().getTeam() == GameTeam.LG) {
+                color1 = "§4";
+            } else if (allPlayer.getStartRole().getTeam() == GameTeam.VILLAGE) {
+                color1 = "§2";
+            } else {
+                color1 = "§9";
             }
-            if (allPlayer.getEndRole().getTeam()==GameTeam.LG){
-                color2="§4";
-            }else if (allPlayer.getEndRole().getTeam()==GameTeam.VILLAGE){
-                color2="§2";
-            }else{
-                color2="§9";
+            if (allPlayer.getEndRole().getTeam() == GameTeam.LG) {
+                color2 = "§4";
+            } else if (allPlayer.getEndRole().getTeam() == GameTeam.VILLAGE) {
+                color2 = "§2";
+            } else {
+                color2 = "§9";
             }
-            Bukkit.broadcastMessage(allPlayer.getPlayer().getName() + " : " + color1 +  allPlayer.getStartRole().getNom() + "§r - " + color2 + allPlayer.getEndRole().getNom());
+            Bukkit.broadcastMessage(allPlayer.getPlayer().getName() + " : " + color1 + allPlayer.getStartRole().getNom() + "§r - " + color2 + allPlayer.getEndRole().getNom());
         }
         return false;
     }
