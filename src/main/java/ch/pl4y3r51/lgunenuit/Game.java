@@ -28,7 +28,6 @@ public final class Game extends JavaPlugin {
     private List<Role> unselectedRoles = new ArrayList<>();
     private List<Location> spawns = new ArrayList<>();
     private final Worker wrk = new Worker(this);
-    private String test;
 
     @Override
     public void onEnable() {

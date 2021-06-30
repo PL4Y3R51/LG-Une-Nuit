@@ -42,7 +42,7 @@ public class ItemListener implements Listener {
         Player player = event.getPlayer();
         Action action = event.getAction();
 
-        if (action == Action.RIGHT_CLICK_AIR) {
+        if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
 
             if (item == null) {
 
