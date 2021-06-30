@@ -1,0 +1,32 @@
+name: OneNightLG
+version: ${project.version}
+main: ch.pl4y3r51.lgunenuit.Game
+api-version: 1.16
+authors: [ PL4Y3R51 ]
+description: Jeu "Loup Garou pour une nuit (Ravensburger)" version Minecraft
+commands:
+  roles:
+    description: Indique les rôles présents dans la partie
+    permission: use.roles
+  vote:
+    description: Vote pour l'élimination d'une certaine personne
+    permission: use.vote
+  indice:
+    description: Permet d'indiquer ce que l'on pense du rôle d'une certaine personne
+    permission: use.indice
+  restartonenightlg:
+    description: Permet de relancer une partie une fois le jour atteint
+    permission: op.restartonenightlg
+permissions:
+  use.*:
+    description: Commandes du jeu
+    children:
+      use.roles: true
+      use.indice: true
+      use.vote: true
+  use.roles:
+    default: true
+  use.indice:
+    default: true
+  use.vote:
+    default: true
