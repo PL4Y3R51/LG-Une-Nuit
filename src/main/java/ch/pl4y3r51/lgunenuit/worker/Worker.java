@@ -176,6 +176,7 @@ public class Worker {
             case -1:
                 game.setGameState(GameState.DAY);
                 Bukkit.broadcastMessage("Le jour se lève !");
+                Bukkit.getWorld("world").setTime(1000);
                 playDay();
                 break;
         }

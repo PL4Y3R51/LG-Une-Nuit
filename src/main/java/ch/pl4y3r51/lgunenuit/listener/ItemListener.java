@@ -156,6 +156,7 @@ public class ItemListener implements Listener {
             if (game.getIngamePlayersList().size() + 3 == game.getSelectedRoles().size()) {
                 Bukkit.broadcastMessage("[§5One Night LG§r] §bLe jeu va commencer");
                 game.setGameState(GameState.NIGHT);
+                Bukkit.getWorld("world").setTime(17000);
                 wrk.startGame();
             } else {
                 Bukkit.broadcastMessage("[§5One Night LG§r] §cLe jeu ne peux pas commencer car il y a " + game.getSelectedRoles().size() + " roles pour " + game.getIngamePlayersList().size() + " joueurs");
