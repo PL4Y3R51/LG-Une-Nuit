@@ -30,21 +30,25 @@ public class CommandVote implements CommandExecutor {
 
                 if (args.length == 1) {
                     if (!player1.isAsVoted()) {
-                        for (IngamePlayers p : game.getVotablePlayersList()) {
-                            if (args[0].equalsIgnoreCase(p.getPlayer().getName())) {
-                                if (args[0].equalsIgnoreCase(player.getName())) {
-                                    player.sendMessage("Vous ne pouvez pas vous voter vous-même");
-                                    return true;
-                                } else {
-                                    player.sendMessage("Votre vote a bien été comptabilisé");
-                                    player1.setAsVoted(true);
-                                    p.setVote(p.getVote() + 1);
-                                    player1.setVotedPlayer(p);
-                                    return true;
+                        if (args[0].equalsIgnoreCase("personne")) {
+                            game.getWrk().setVotePersonne(game.getWrk().getVotePersonne() + 1);
+                        } else {
+                            for (IngamePlayers p : game.getVotablePlayersList()) {
+                                if (args[0].equalsIgnoreCase(p.getPlayer().getName())) {
+                                    if (args[0].equalsIgnoreCase(player.getName())) {
+                                        player.sendMessage("Vous ne pouvez pas vous voter vous-même");
+                                        return true;
+                                    } else {
+                                        player.sendMessage("Votre vote a bien été comptabilisé");
+                                        player1.setAsVoted(true);
+                                        p.setVote(p.getVote() + 1);
+                                        player1.setVotedPlayer(p);
+                                        return true;
+                                    }
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         player.sendMessage("Vous avez déjà voté !");
                     }
                     player.sendMessage("Le joueur indiqué n'est pas votable");

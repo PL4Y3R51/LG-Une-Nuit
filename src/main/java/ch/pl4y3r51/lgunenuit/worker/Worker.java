@@ -16,6 +16,7 @@ public class Worker {
 
     private final Game game;
     private final WorkerRoles wrkRoles;
+    private int votePersonne = 0;
 
     public Worker(Game game) {
         this.game = game;
@@ -191,6 +192,7 @@ public class Worker {
         for (IngamePlayers p : game.getIngamePlayersList()) {
             votes.add(p.getVote());
         }
+        votes.add(votePersonne);
         Collections.sort(votes);
 
         int maxVotes = votes.get(votes.size() - 1);
@@ -202,27 +204,83 @@ public class Worker {
             }
         }
 
-        if (players.size() == 1) {
+
+        if (players.size() == 0) {
+            List<IngamePlayers> winners = new ArrayList<>();
+            boolean lgWin = false;
+            for (IngamePlayers p: game.getIngamePlayersList()) {
+                if (p.getEndRole().getPassage()==2){
+                    lgWin=true;
+                    winners.add(p);
+                }
+            }
+
+            if (lgWin){
+                for (IngamePlayers p: game.getIngamePlayersList()) {
+                    if (p.getEndRole().getPassage()==3){
+                        winners.add(p);
+                        break;
+                    }
+                }
+                Bukkit.broadcastMessage("§6------------------------");
+                Bukkit.broadcastMessage("§4L'équipe des Loups Garous ont remportés la partie !");
+                Bukkit.broadcastMessage("§6------------------------");
+                Bukkit.broadcastMessage("Gagnants :");
+                for (IngamePlayers winner : winners) {
+                    Bukkit.broadcastMessage(winner.getPlayer().getName() + " (" + winner.getEndRole().getNom() + ")");
+                }
+                Bukkit.broadcastMessage("§6------------------------");
+            }else{
+                for (IngamePlayers p: game.getIngamePlayersList()) {
+                    if (p.getEndRole().getPassage()==3){
+                        winners.add(p);
+                        break;
+                    }
+                }
+                //sbire win ?
+                if (winners.size()==1){
+                    Bukkit.broadcastMessage("§6------------------------");
+                    Bukkit.broadcastMessage("§4Le sbire a remporté la partie !");
+                    Bukkit.broadcastMessage("§6------------------------");
+                    Bukkit.broadcastMessage("Gagnants :");
+                    for (IngamePlayers winner : winners) {
+                        Bukkit.broadcastMessage(winner.getPlayer().getName() + " (" + winner.getEndRole().getNom() + ")");
+                    }
+                    Bukkit.broadcastMessage("§6------------------------");
+                }else{
+                    //Vilage Win
+                    Bukkit.broadcastMessage("§6------------------------");
+                    Bukkit.broadcastMessage("§2L'équipe des Villageois ont remportés la partie !");
+                    Bukkit.broadcastMessage("§6------------------------");
+                    Bukkit.broadcastMessage("Les villageois ont décrété qu'il n'y avait aucune menace dans le village, et ils avaient raison !");
+                    Bukkit.broadcastMessage("§6------------------------");
+                }
+            }
+
+
+
+        } else if (players.size() == 1) {
             eliminate(players.get(0));
-        } else if (players.size() > 1) {
+        } else {
             for (IngamePlayers p : game.getIngamePlayersList()) {
                 p.setAsVoted(false);
                 p.setVote(0);
             }
             game.setVotablePlayersList(players);
-            Bukkit.broadcastMessage("Le vote a terminé sur une égalité parfaite, votez a nouveau parmis les joueurs les plus votés de la dernière partie.");
+            Bukkit.broadcastMessage("Le vote a terminé sur une égalité parfaite, votez à nouveau parmis les joueurs les plus votés de la dernière partie.");
 
             VoteTimer voteTimer = new VoteTimer(game);
             voteTimer.runTaskTimer(game, 0, 20);
         }
     }
 
-    private void eliminate(IngamePlayers p) {
+    private boolean eliminate(IngamePlayers p) {
         game.setGameState(GameState.FINISHED);
         Bukkit.broadcastMessage("Le joueur " + p.getPlayer().getName() + " (" + p.getEndRole().getNom() + ") a été éliminé avec " + p.getVote() + " votes");
 
         if (p.getEndRole().getNom().equalsIgnoreCase("CHASSEUR")) {
             eliminate(p.getVotedPlayer());
+            return true;
         } else {
             if (p.getEndRole().getTeam() == GameTeam.TANNEUR) {
                 //Win Tanneur
@@ -331,5 +389,35 @@ public class Worker {
                 }
             }
         }
+        Bukkit.broadcastMessage("§6------------------------");
+        for (IngamePlayers allPlayer: game.getIngamePlayersList()) {
+            String color1;
+            String color2;
+            if (allPlayer.getStartRole().getTeam()==GameTeam.LG){
+                color1="§4";
+            }else if (allPlayer.getStartRole().getTeam()==GameTeam.VILLAGE){
+                color1="§2";
+            }else{
+                color1="§9";
+            }
+            if (allPlayer.getEndRole().getTeam()==GameTeam.LG){
+                color2="§4";
+            }else if (allPlayer.getEndRole().getTeam()==GameTeam.VILLAGE){
+                color2="§2";
+            }else{
+                color2="§9";
+            }
+            Bukkit.broadcastMessage(allPlayer.getPlayer().getName() + " : " + color1 +  allPlayer.getStartRole().getNom() + "§r - " + color2 + allPlayer.getEndRole().getNom());
+        }
+        return false;
+    }
+
+
+    public int getVotePersonne() {
+        return votePersonne;
+    }
+
+    public void setVotePersonne(int votePersonne) {
+        this.votePersonne = votePersonne;
     }
 }
