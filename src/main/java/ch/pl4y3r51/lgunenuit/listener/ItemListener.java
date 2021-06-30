@@ -264,7 +264,7 @@ public class ItemListener implements Listener {
                 break;
             }
             //Noiseuse 2
-            if (isItem(itemClicked, Material.PLAYER_HEAD, "§e" + p.getPlayer().getName())) {
+            if (isItem(itemClicked, Material.PLAYER_HEAD, "§c" + p.getPlayer().getName())) {
                 event.setCancelled(true);
                 player.closeInventory();
                 //Enregistrer la première personne séléctionnée par la noiseuse
