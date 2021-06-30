@@ -25,7 +25,6 @@ public class CommandRestart implements CommandExecutor {
         if (game.getGameState() == GameState.FINISHED) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-
                 for (Role r : game.getSelectedRoles()) {
                     r.setPassed(false);
                     game.getUnselectedRoles().add(r);
@@ -42,6 +41,9 @@ public class CommandRestart implements CommandExecutor {
                 chooseCompass.setItemMeta(chooseCompassMeta);
                 player.getInventory().setItem(4, chooseCompass);
 
+                game.getVotablePlayersList().clear();
+                game.getMysteriousRoles().clear();
+                game.getWrk().setVotePersonne(0);
                 game.getSelectedRoles().clear();
                 game.setGameState(GameState.NOGAME);
             }
