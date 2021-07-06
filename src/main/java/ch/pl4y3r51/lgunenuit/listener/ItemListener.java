@@ -62,7 +62,7 @@ public class ItemListener implements Listener {
                 inv.setItem(7, itemWithName(Material.BLACK_CONCRETE, "§4Role Mystèrieux 3"));
                 player.openInventory(inv);
 
-            } else if (isItem(item, Material.NETHER_STAR, "ITEM VOYANTE - 1")) {
+            } else if (isItem(item, Material.CYAN_DYE, "ITEM VOYANTE - 1")) {
 
                 Inventory inv = Bukkit.createInventory(null, 27, "§5Menu Mystèrieux");
                 for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
@@ -75,7 +75,7 @@ public class ItemListener implements Listener {
                 inv.setItem(inv.getSize() - 3, itemWithName(Material.BLACK_CONCRETE, "§5Role Mystèrieux 3"));
                 player.openInventory(inv);
 
-            } else if (isItem(item, Material.NETHER_STAR, "ITEM VOYANTE - 2")) {
+            } else if (isItem(item, Material.CYAN_DYE, "ITEM VOYANTE - 2")) {
                 //Checker la recherche
                 Inventory inv = Bukkit.createInventory(null, 9, "§5Menu Mystèrieux");
                 inv.setItem(1, itemWithName(Material.BLACK_CONCRETE, "§4Role Mystèrieux 1"));
@@ -83,7 +83,7 @@ public class ItemListener implements Listener {
                 inv.setItem(7, itemWithName(Material.BLACK_CONCRETE, "§4Role Mystèrieux 3"));
                 player.openInventory(inv);
 
-            } else if (isItem(item, Material.NETHER_STAR, "ITEM VOLEUR")) {
+            } else if (isItem(item, Material.GRAY_DYE, "ITEM VOLEUR")) {
                 Inventory inv = Bukkit.createInventory(null, 27, "§2Menu Mystèrieux");
                 for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
                     if (!(game.getIngamePlayersList().get(i).getPlayer().getName().equals(player.getName()))) {
@@ -92,7 +92,7 @@ public class ItemListener implements Listener {
                 }
                 player.openInventory(inv);
 
-            } else if (isItem(item, Material.NETHER_STAR, "ITEM NOISEUSE - 1")) {
+            } else if (isItem(item, Material.GREEN_DYE, "ITEM NOISEUSE - 1")) {
 
                 Inventory inv = Bukkit.createInventory(null, 27, "§6Menu Mystèrieux");
                 for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
@@ -102,7 +102,7 @@ public class ItemListener implements Listener {
                 }
                 player.openInventory(inv);
 
-            } else if (isItem(item, Material.NETHER_STAR, "ITEM NOISEUSE - 2")) {
+            } else if (isItem(item, Material.GREEN_DYE, "ITEM NOISEUSE - 2")) {
 
                 Inventory inv = Bukkit.createInventory(null, 27, "§6Menu Mystèrieux");
                 for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
@@ -112,7 +112,7 @@ public class ItemListener implements Listener {
                 }
                 player.openInventory(inv);
 
-            } else if (isItem(item, Material.NETHER_STAR, "ITEM SOÛLARD")) {
+            } else if (isItem(item, Material.LIGHT_BLUE_DYE, "ITEM SOÛLARD")) {
                 //Checker la recherche
                 Inventory inv = Bukkit.createInventory(null, 9, "§3Menu Mystèrieux");
                 inv.setItem(1, itemWithName(Material.BLACK_CONCRETE, "§3Role Mystèrieux 1"));
@@ -208,21 +208,21 @@ public class ItemListener implements Listener {
             player.closeInventory();
             player.sendMessage("Le rôle mytèrieux N° 1 est " + game.getMysteriousRoles().get(0).getNom());
             player.getInventory().clear();
-            player.getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOYANTE - 2"));
+            player.getInventory().setItem(4, itemWithName(Material.CYAN_DYE, "ITEM VOYANTE - 2"));
         }
         if (isItem(itemClicked, Material.BLACK_CONCRETE, "§5Role Mystèrieux 2")) {
             event.setCancelled(true);
             player.closeInventory();
             player.sendMessage("Le rôle mytèrieux N° 2 est " + game.getMysteriousRoles().get(1).getNom());
             player.getInventory().clear();
-            player.getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOYANTE - 2"));
+            player.getInventory().setItem(4, itemWithName(Material.CYAN_DYE, "ITEM VOYANTE - 2"));
         }
         if (isItem(itemClicked, Material.BLACK_CONCRETE, "§5Role Mystèrieux 3")) {
             event.setCancelled(true);
             player.closeInventory();
             player.sendMessage("Le rôle mytèrieux N° 3 est " + game.getMysteriousRoles().get(2).getNom());
             player.getInventory().clear();
-            player.getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOYANTE - 2"));
+            player.getInventory().setItem(4, itemWithName(Material.CYAN_DYE, "ITEM VOYANTE - 2"));
         }
         for (IngamePlayers p : game.getIngamePlayersList()) {
             //Voyante
@@ -261,7 +261,7 @@ public class ItemListener implements Listener {
                 //Enregistrer la première personne séléctionnée par la noiseuse
                 choixUnNoiseuse = p;
                 player.getInventory().clear();
-                player.getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM NOISEUSE - 2"));
+                player.getInventory().setItem(4, itemWithName(Material.GREEN_DYE, "ITEM NOISEUSE - 2"));
                 break;
             }
             //Noiseuse 2

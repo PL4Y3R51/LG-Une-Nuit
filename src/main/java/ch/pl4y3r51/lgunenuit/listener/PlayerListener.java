@@ -70,7 +70,7 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (game.getGameState()==GameState.NIGHT) {
-            p.sendMessage("§cVous ne pouvez pas bouger durant la nuit.");
+            e.setCancelled(true);
         }
     }
 }

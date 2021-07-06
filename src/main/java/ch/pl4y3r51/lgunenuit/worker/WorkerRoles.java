@@ -30,15 +30,6 @@ public class WorkerRoles {
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
         }
-        if (players.size() > 0) {
-            for (IngamePlayers p : players) {
-                if (p.getPlayer().getActivePotionEffects().size() > 0){
-                    for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                        p.getPlayer().removePotionEffect(pe.getType());
-                    }
-                }
-            }
-        }
 
         players.remove(null);
         Bukkit.broadcastMessage("[§5One Night LG§r] Les loups garous se réveillent");
@@ -54,9 +45,11 @@ public class WorkerRoles {
                 //il ne se passe rien, le timer se passe sans actions
                 break;
             case 1:
+                players.get(0).getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+                players.get(0).getPlayer().removePotionEffect(PotionEffectType.SLOW);
                 players.get(0).getPlayer().sendMessage("Vous êtes le seul loup-garou, utilisez l'étoile pour regarder un des rôles mytèrieux");
                 //Donner Item de recherche
-                players.get(0).getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM LOUP-GAROU"));
+                players.get(0).getPlayer().getInventory().setItem(4, itemWithName(Material.BLACK_DYE, "ITEM LOUP-GAROU"));
                 break;
             case 2:
                 //Envoyer à chaque loup le nom de l'autre.
@@ -64,6 +57,8 @@ public class WorkerRoles {
                     for (IngamePlayers messageContent : players) {
                         messageReceiver.getPlayer().sendMessage("Le joueur " + messageContent.getPlayer().getName() + " est un Loup-Garou");
                     }
+                    messageReceiver.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+                    players.get(0).getPlayer().removePotionEffect(PotionEffectType.SLOW);
                 }
                 break;
             default:
@@ -87,15 +82,17 @@ public class WorkerRoles {
         }
 
         if (p != null) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
+            p.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+            p.getPlayer().removePotionEffect(PotionEffectType.SLOW);
+            boolean test = true;
             for (IngamePlayers possibleLoupGarou : game.getIngamePlayersList()) {
                 if (possibleLoupGarou.getEndRole().getPassage() == 2) {
                     p.getPlayer().sendMessage("Le joueur " + possibleLoupGarou.getPlayer().getName() + " est un Loup-Garou");
+                    test = false;
                 }
+            }
+            if (test){
+                p.getPlayer().sendMessage("Il n'y a pas de loups-garous dans le jeu, pour l'instant...?");
             }
         }
         SbireTimer sbireTimer = new SbireTimer(game);
@@ -106,15 +103,6 @@ public class WorkerRoles {
         for (IngamePlayers p : game.getIngamePlayersList()) {
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
-        }
-
-
-        for (IngamePlayers p : players) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
         }
 
         players.remove(null);
@@ -131,6 +119,8 @@ public class WorkerRoles {
                 //il ne se passe rien, le timer se passe sans actions
                 break;
             case 1:
+                players.get(0).getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+                players.get(0).getPlayer().removePotionEffect(PotionEffectType.SLOW);
                 players.get(0).getPlayer().sendMessage("Vous êtes le seul franc-maçon, le deuxième franc-maçon est surement un rôle mystère");
                 break;
             case 2:
@@ -139,6 +129,8 @@ public class WorkerRoles {
                     for (IngamePlayers messageContent : players) {
                         messageReceiver.getPlayer().sendMessage("Le joueur " + messageContent.getPlayer().getName() + " est un Franc-Maçon");
                     }
+                   messageReceiver.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+                    messageReceiver.getPlayer().removePotionEffect(PotionEffectType.SLOW);
                 }
                 break;
             default:
@@ -166,13 +158,10 @@ public class WorkerRoles {
         }
 
         if (p != null) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
+            p.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+            p.getPlayer().removePotionEffect(PotionEffectType.SLOW);
             //Donne l'item de voyante 1
-            p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOYANTE - 1"));
+            p.getPlayer().getInventory().setItem(4, itemWithName(Material.CYAN_DYE, "ITEM VOYANTE - 1"));
         }
 
         VoyanteTimer voyanteTimer = new VoyanteTimer(game);
@@ -195,13 +184,10 @@ public class WorkerRoles {
         }
 
         if (p != null) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
+            p.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+            p.getPlayer().removePotionEffect(PotionEffectType.SLOW);
             //Donner l'item de voleur pour changer son rôle
-            p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM VOLEUR"));
+            p.getPlayer().getInventory().setItem(4, itemWithName(Material.GRAY_DYE, "ITEM VOLEUR"));
         }
 
         VoleurTimer voleurTimer = new VoleurTimer(game);
@@ -225,13 +211,10 @@ public class WorkerRoles {
         }
 
         if (p != null) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
+            p.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+            p.getPlayer().removePotionEffect(PotionEffectType.SLOW);
             //Donner l'item de noiseuse pour changer son rôle
-            p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM NOISEUSE - 1"));
+            p.getPlayer().getInventory().setItem(4, itemWithName(Material.GREEN_DYE, "ITEM NOISEUSE - 1"));
         }
 
         NoiseuseTimer noiseuseTimer = new NoiseuseTimer(game);
@@ -254,13 +237,10 @@ public class WorkerRoles {
         }
 
         if (p != null) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
+            p.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+            p.getPlayer().removePotionEffect(PotionEffectType.SLOW);
             //Donner l'item de soulard pour changer son rôle
-            p.getPlayer().getInventory().setItem(4, itemWithName(Material.NETHER_STAR, "ITEM SOÛLARD"));
+            p.getPlayer().getInventory().setItem(4, itemWithName(Material.LIGHT_BLUE_DYE, "ITEM SOÛLARD"));
         }
 
         SoulardTimer soulardTimer = new SoulardTimer(game);
@@ -284,11 +264,8 @@ public class WorkerRoles {
         }
 
         if (p != null) {
-            if (p.getPlayer().getActivePotionEffects().size() > 0){
-                for (PotionEffect pe : p.getPlayer().getActivePotionEffects()) {
-                    p.getPlayer().removePotionEffect(pe.getType());
-                }
-            }
+            p.getPlayer().removePotionEffect(PotionEffectType.BLINDNESS);
+            p.getPlayer().removePotionEffect(PotionEffectType.SLOW);
             p.getPlayer().sendMessage("Votre role est maintenant " + p.getEndRole().getNom());
         }
 

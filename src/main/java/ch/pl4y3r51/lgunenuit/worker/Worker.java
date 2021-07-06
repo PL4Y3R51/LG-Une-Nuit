@@ -9,6 +9,7 @@ import ch.pl4y3r51.lgunenuit.timer.FirstStart;
 import ch.pl4y3r51.lgunenuit.timer.FreezeTimer;
 import ch.pl4y3r51.lgunenuit.timer.VoteTimer;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -41,6 +42,7 @@ public class Worker {
         //DONNER LES EFFETS + clear inv
         for (IngamePlayers p : game.getIngamePlayersList()) {
             p.getPlayer().getInventory().clear();
+            p.getPlayer().setGameMode(GameMode.ADVENTURE);
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 99999999, 10));
             p.getPlayer().addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 99999999, 10));
             p.getPlayer().teleport(p.getSpawn());
@@ -221,6 +223,7 @@ public class Worker {
 
 
         if (players.size() == 0) {
+            game.setGameState(GameState.FINISHED);
             List<IngamePlayers> winners = new ArrayList<>();
             boolean lgWin = false;
             for (IngamePlayers p : game.getIngamePlayersList()) {
@@ -396,7 +399,7 @@ public class Worker {
                         Bukkit.broadcastMessage("§6------------------------");
                         Bukkit.broadcastMessage("§2L'équipe des Villageois ont remportés la partie !");
                         Bukkit.broadcastMessage("§6------------------------");
-                        Bukkit.broadcastMessage("Les villageois semblait avoir des soupçons infondés... aucun d'eu ne se revele être méchant !");
+                        Bukkit.broadcastMessage("Les villageois semblait avoir des soupçons infondés... aucun d'eux ne se revele être méchant !");
                         Bukkit.broadcastMessage("(Paix a l'âme de " + p.getPlayer().getName() + ")");
                         Bukkit.broadcastMessage("§6------------------------");
                     }

@@ -31,7 +31,10 @@ public class CommandVote implements CommandExecutor {
                 if (args.length == 1) {
                     if (!player1.isAsVoted()) {
                         if (args[0].equalsIgnoreCase("personne")) {
+                            player1.setAsVoted(true);
                             game.getWrk().setVotePersonne(game.getWrk().getVotePersonne() + 1);
+                            player.sendMessage("Votre vote a bien été comptabilisé");
+                            return true;
                         } else {
                             for (IngamePlayers p : game.getVotablePlayersList()) {
                                 if (args[0].equalsIgnoreCase(p.getPlayer().getName())) {
