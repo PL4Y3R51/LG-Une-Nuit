@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -64,6 +65,18 @@ public class PlayerListener implements Listener {
         }
         event.setQuitMessage(null);
         event.setQuitMessage("[§5One Night LG§r] §6" + player.getName() + "§c a quitté la partie");
+    }
+
+    @EventHandler
+    public void onQuit(PlayerKickEvent event) {
+        Player player = event.getPlayer();
+        if (game.getGameState() != GameState.NOGAME){
+            for (int i = 0; i < game.getIngamePlayersList().size(); i++) {
+                if (player.getName().equalsIgnoreCase(game.getIngamePlayersList().get(i).getPlayer().getName())) {
+                    game.getIngamePlayersList().remove(i);
+                }
+            }
+        }
     }
 
     @EventHandler
