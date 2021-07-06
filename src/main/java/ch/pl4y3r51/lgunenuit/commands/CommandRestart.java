@@ -22,9 +22,10 @@ public class CommandRestart implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (game.getGameState() == GameState.FINISHED) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+            if (game.getGameState() == GameState.FINISHED) {
+
                 for (Role r : game.getSelectedRoles()) {
                     r.setPassed(false);
                     game.getUnselectedRoles().add(r);
@@ -46,8 +47,14 @@ public class CommandRestart implements CommandExecutor {
                 game.getWrk().setVotePersonne(0);
                 game.getSelectedRoles().clear();
                 game.setGameState(GameState.NOGAME);
+
+            } else {
+                player.sendMessage("La partie n'est pas finie !");
+                player.sendMessage("Si toutefois vous voulez redémarrer le plugin, il faut malheureusement relancer le serveur avec le plugin.");
             }
         }
         return false;
     }
+
 }
+
